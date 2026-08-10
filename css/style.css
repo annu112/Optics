@@ -26,7 +26,7 @@ align-items:center;
 }
 
 .logo img{
-height:110px;
+height: 70px;
 width:auto;
 }
 
@@ -85,7 +85,7 @@ margin-left:120px;
 }
 
 .hero-logo{
-width:500px;
+width: 250px;
 max-width:100%;
 height:auto;
 display:block;
