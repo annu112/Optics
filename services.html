@@ -1,573 +1,173 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Vision Optics | Our Services</title>
-
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-
-<style>
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    font-family: Arial, sans-serif;
-    background: #050b18;
-    color: white;
-}
-
-/* ================= NAVBAR ================= */
-
-.navbar {
-    width: 100%;
-    min-height: 75px;
-    padding: 12px 6%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background: #080f20;
-    border-bottom: 1px solid rgba(212, 175, 55, 0.25);
-}
-
-.logo img {
-    width: 150px;
-    height: auto;
-}
-
-.nav-links {
-    display: flex;
-    list-style: none;
-    gap: 35px;
-}
-
-.nav-links a {
-    color: white;
-    text-decoration: none;
-    font-size: 15px;
-    font-weight: 600;
-    transition: 0.3s;
-}
-
-.nav-links a:hover {
-    color: #d4af37;
-}
-
-.nav-btn {
-    text-decoration: none;
-    color: #050b18;
-    background: linear-gradient(135deg, #f5d76e, #c99b24);
-    padding: 11px 20px;
-    border-radius: 25px;
-    font-weight: bold;
-    transition: 0.3s;
-}
-
-.nav-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(212, 175, 55, 0.25);
-}
-
-
-/* ================= SERVICES ================= */
-
-.services {
-    padding: 65px 7%;
-    text-align: center;
-}
-
-.services h1 {
-    font-size: 16px;
-    color: #d4af37;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    margin-bottom: 8px;
-}
-
-.services h2 {
-    font-size: 42px;
-    margin-bottom: 12px;
-    background: linear-gradient(90deg, #ffffff, #d4af37);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-.services-intro {
-    max-width: 650px;
-    margin: 0 auto 45px;
-    color: #b8c0d0;
-    line-height: 1.7;
-}
-
-
-/* ================= SERVICE GRID ================= */
-
-.service-grid {
-    max-width: 1150px;
-    margin: auto;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 25px;
-}
-
-.service-card {
-    background: linear-gradient(145deg, #101a30, #080f20);
-    border: 1px solid rgba(212, 175, 55, 0.15);
-    border-radius: 18px;
-    overflow: hidden;
-    text-align: left;
-    transition: all 0.35s ease;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.25);
-}
-
-.service-card:hover {
-    transform: translateY(-8px);
-    border-color: rgba(212, 175, 55, 0.6);
-    box-shadow: 0 15px 40px rgba(212, 175, 55, 0.12);
-}
-
-.service-image {
-    width: 100%;
-    height: 210px;
-    object-fit: cover;
-    display: block;
-}
-
-.service-content {
-    padding: 22px;
-}
-
-.service-icon {
-    width: 45px;
-    height: 45px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    background: rgba(212, 175, 55, 0.12);
-    color: #d4af37;
-    font-size: 20px;
-    margin-bottom: 15px;
-}
-
-.service-card h3 {
-    color: #f0c94c;
-    font-size: 20px;
-    margin-bottom: 10px;
-}
-
-.service-card p {
-    color: #d1d6e0;
-    font-size: 14px;
-    line-height: 1.7;
-}
-
-
-/* ================= CTA ================= */
-
-.service-cta {
-    max-width: 1000px;
-    margin: 65px auto 0;
-    padding: 40px 25px;
-    border-radius: 20px;
-    background:
-        linear-gradient(
-            rgba(5,11,24,0.85),
-            rgba(5,11,24,0.92)
-        ),
-        url("https://images.unsplash.com/photo-1574258495973-f010dfbb5371?auto=format&fit=crop&w=1400&q=80");
-
-    background-size: cover;
-    background-position: center;
-
-    border: 1px solid rgba(212,175,55,0.3);
-}
-
-.service-cta h2 {
-    font-size: 28px;
-    color: white;
-    margin-bottom: 10px;
-}
-
-.service-cta p {
-    color: #c6ccd8;
-    margin-bottom: 22px;
-}
-
-.cta-btn {
-    display: inline-block;
-    text-decoration: none;
-    padding: 13px 25px;
-    border-radius: 30px;
-    background: linear-gradient(135deg, #f5d76e, #c99b24);
-    color: #050b18;
-    font-weight: bold;
-    transition: 0.3s;
-}
-
-.cta-btn:hover {
-    transform: scale(1.05);
-}
-
-
-/* ================= WHATSAPP ================= */
-
-.floating-whatsapp {
-    position: fixed;
-    right: 20px;
-    bottom: 20px;
-
-    width: 58px;
-    height: 58px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    background: #25D366;
-    color: white;
-
-    border-radius: 50%;
-    font-size: 30px;
-
-    text-decoration: none;
-
-    box-shadow: 0 8px 25px rgba(37,211,102,0.35);
-
-    z-index: 999;
-}
-
-.floating-whatsapp:hover {
-    transform: scale(1.1);
-}
-
-
-/* ================= MOBILE ================= */
-
-@media (max-width: 900px) {
-
-    .service-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .nav-links {
-        gap: 15px;
-    }
-
-}
-
-@media (max-width: 650px) {
-
-    .navbar {
-        flex-direction: column;
-        gap: 15px;
-    }
-
-    .nav-links {
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-
-    .service-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .services h2 {
-        font-size: 32px;
-    }
-
-    .service-image {
-        height: 230px;
-    }
-
-}
-
-</style>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Vision Optics offers professional eye testing, premium eyeglass frames, stylish sunglasses, contact lenses, glasses repair, and home delivery services.">
+    <title>Our Services | Vision Optics</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
 </head>
 
-
-<body>
-
-
-<!-- ================= NAVBAR ================= -->
-
-<nav class="navbar">
-
-    <div class="logo">
-        <img src="images/logo.png" alt="Vision Optics">
-    </div>
-
-    <ul class="nav-links">
-
-        <li>
-            <a href="index.html">Home</a>
-        </li>
-
-        <li>
-            <a href="about.html">About</a>
-        </li>
-
-        <li>
-            <a href="services.html">Services</a>
-        </li>
-
-        <li>
-            <a href="contact.html">Contact</a>
-        </li>
-
-    </ul>
-
-    <a href="https://wa.me/919898174744"
-       target="_blank"
-       class="nav-btn">
-
-        <i class="fab fa-whatsapp"></i>
-        WhatsApp Us
-
-    </a>
-
-</nav>
-
-
-<!-- ================= SERVICES ================= -->
-
-<section class="services">
-
-    <h1>VISION OPTICS</h1>
-
-    <h2>Our Premium Services</h2>
-
-    <p class="services-intro">
-        Complete eyewear solutions designed for clear vision,
-        comfort and modern style. At Vision Optics, we help you
-        find the perfect eyewear for your everyday needs.
-    </p>
-
-
-    <div class="service-grid">
-
-
-        <!-- EYE TESTING -->
-
-        <div class="service-card">
-
-            <img
-            class="service-image"
-            src="images/eye-testing.png"
-            alt="Professional Eye Testing">
-
-            <div class="service-content">
-
-                <div class="service-icon">
-                    <i class="fas fa-eye"></i>
-                </div>
-
-                <h3>Professional Eye Testing</h3>
-
-                <p>
-                    Accurate eye testing to help determine your
-                    vision requirements and provide suitable
-                    eyewear solutions.
-                </p>
-
-            </div>
-
-        </div>
-
-
-        <!-- PREMIUM FRAMES -->
-
-        <div class="service-card">
-
-            <img
-            class="service-image"
-            src="https://images.unsplash.com/photo-1577803645773-f96470509666?auto=format&fit=crop&w=900&q=85"
-            alt="Premium Eyeglass Frames">
-
-            <div class="service-content">
-
-                <div class="service-icon">
-                    <i class="fas fa-glasses"></i>
-                </div>
-
-                <h3>Premium Eyewear Frames</h3>
-
-                <p>
-                    Discover stylish and comfortable frames
-                    available in different designs to match
-                    your personality and lifestyle.
-                </p>
-
-            </div>
-
-        </div>
-
-
-        <!-- SUNGLASSES -->
-
-        <div class="service-card">
-
-            <img
-            class="service-image"
-            src="https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=900&q=85"
-            alt="Stylish Sunglasses">
-
-            <div class="service-content">
-
-                <div class="service-icon">
-                    <i class="fas fa-sun"></i>
-                </div>
-
-                <h3>Stylish Sunglasses</h3>
-
-                <p>
-                    Upgrade your style with fashionable sunglasses
-                    that combine comfort, protection and modern
-                    design.
-                </p>
-
-            </div>
-
-        </div>
-
-
-        <!-- CONTACT LENSES -->
-
-        <div class="service-card">
-
-            <img
-            class="service-image"
-            src="contact-lenses.jpg"
-            alt="Contact Lenses">
-
-            <div class="service-content">
-
-                <div class="service-icon">
-                    <i class="fas fa-circle"></i>
-                </div>
-
-                <h3>Contact Lenses</h3>
-
-                <p>
-                    Comfortable contact lens options for everyday
-                    use, lifestyle needs and a natural look.
-                </p>
-
-            </div>
-
-        </div>
-
-
-        <!-- GLASSES REPAIR -->
-
-        <div class="service-card">
-
-            <img
-            class="service-image"
-            src="https://images.unsplash.com/photo-1574258495973-f010dfbb5371?auto=format&fit=crop&w=900&q=85"
-            alt="Glasses Repair">
-
-            <div class="service-content">
-
-                <div class="service-icon">
-                    <i class="fas fa-screwdriver-wrench"></i>
-                </div>
-
-                <h3>Glasses Repair & Fitting</h3>
-
-                <p>
-                    Reliable glasses repair, adjustment and fitting
-                    services to keep your eyewear comfortable and
-                    ready to wear.
-                </p>
-
-            </div>
-
-        </div>
-
-
-        <!-- HOME DELIVERY -->
-
-        <div class="service-card">
-
-            <img
-            class="service-image"
-            src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=900&q=85"
-            alt="Home Delivery">
-
-            <div class="service-content">
-
-                <div class="service-icon">
-                    <i class="fas fa-truck"></i>
-                </div>
-
-                <h3>Home Delivery</h3>
-
-                <p>
-                    Get your selected eyewear conveniently delivered
-                    to your doorstep. Contact us for availability
-                    and delivery details.
-                </p>
-
-            </div>
-
-        </div>
-
-
-    </div>
-
-
-    <!-- ================= CTA ================= -->
-
-    <div class="service-cta">
-
-        <h2>Looking for the Perfect Eyewear?</h2>
-
-        <p>
-            Visit Vision Optics or contact us on WhatsApp.
-            Our team will be happy to help you choose the right
-            eyewear for your vision and style.
-        </p>
-
-        <a
-        href="https://wa.me/919898174744"
-        target="_blank"
-        class="cta-btn">
-
-            <i class="fab fa-whatsapp"></i>
-            Chat With Us
-
+<body class="services-page">
+
+    <!-- ================= NAVBAR ================= -->
+    <nav class="navbar">
+        <a href="index.html" class="logo">
+            <img src="images/logo.png" alt="Vision Optics Logo">
         </a>
 
-    </div>
+        <!-- Mobile Menu Toggle -->
+        <input type="checkbox" id="menu-toggle">
+        <label for="menu-toggle" class="menu-icon">
+            <i class="fas fa-bars"></i>
+        </label>
 
-</section>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="services.html" class="active">Services</a></li>
+            <li><a href="collection.html">Collection</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
 
+        <a href="https://wa.me/919898174744" target="_blank" class="nav-btn">
+            <i class="fab fa-whatsapp"></i> WhatsApp Us
+        </a>
+    </nav>
 
-<!-- ================= FLOATING WHATSAPP ================= -->
+    <!-- ================= SERVICES HERO ================= -->
+    <section class="collection-hero">
+        <div class="collection-hero-content">
+            <div class="section-label">
+                <span></span> OPTICAL EXPERTISE <span></span>
+            </div>
+            <h1>Our Premium <span>Services</span></h1>
+            <p>Complete eyewear solutions designed for clear vision, maximum comfort, and modern style. At Vision Optics, we help you find the perfect optical care for your everyday needs.</p>
+        </div>
+    </section>
 
-<a
-href="https://wa.me/919898174744"
-target="_blank"
-class="floating-whatsapp"
-aria-label="Contact Vision Optics on WhatsApp">
+    <!-- ================= SERVICES LIST ================= -->
+    <section class="services-preview" style="padding-top: 60px;">
+        <div class="why-grid" style="grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); max-width: 1200px;">
 
-    <i class="fab fa-whatsapp"></i>
+            <!-- EYE TESTING -->
+            <div class="why-card">
+                <div class="why-icon">
+                    <i class="fas fa-eye"></i>
+                </div>
+                <h3>Professional Eye Testing</h3>
+                <p>Accurate computerised eye testing to evaluate your precise prescription and provide optical recommendations.</p>
+                <div class="card-line"></div>
+            </div>
 
-</a>
+            <!-- PREMIUM FRAMES -->
+            <div class="why-card">
+                <div class="why-icon">
+                    <i class="fas fa-glasses"></i>
+                </div>
+                <h3>Premium Eyewear Frames</h3>
+                <p>Discover stylish and comfortable frames available in diverse titanium, acetate, and metal designs.</p>
+                <div class="card-line"></div>
+            </div>
 
+            <!-- SUNGLASSES -->
+            <div class="why-card">
+                <div class="why-icon">
+                    <i class="fas fa-sun"></i>
+                </div>
+                <h3>Stylish Sunglasses</h3>
+                <p>Upgrade your outdoor look with UV400 polarized sunglasses combining glare protection and trendsetting designs.</p>
+                <div class="card-line"></div>
+            </div>
 
-<script src="js/script.js"></script>
+            <!-- CONTACT LENSES -->
+            <div class="why-card">
+                <div class="why-icon">
+                    <i class="fas fa-circle-dot"></i>
+                </div>
+                <h3>Contact Lenses</h3>
+                <p>Comfortable daily, monthly, and toric contact lens options for active lifestyle needs and a natural feel.</p>
+                <div class="card-line"></div>
+            </div>
 
+            <!-- GLASSES REPAIR -->
+            <div class="why-card">
+                <div class="why-icon">
+                    <i class="fas fa-screwdriver-wrench"></i>
+                </div>
+                <h3>Glasses Repair & Fitting</h3>
+                <p>Reliable frame alignment, screw adjustments, nose pad replacements, and lens re-fitting services.</p>
+                <div class="card-line"></div>
+            </div>
+
+            <!-- HOME DELIVERY -->
+            <div class="why-card">
+                <div class="why-icon">
+                    <i class="fas fa-truck-fast"></i>
+                </div>
+                <h3>Home Delivery</h3>
+                <p>Convenient delivery of your customized prescription eyeglasses or contact lenses right to your doorstep.</p>
+                <div class="card-line"></div>
+            </div>
+
+        </div>
+
+        <!-- ================= CTA ================= -->
+        <div class="intro" style="margin-top: 80px; border-radius: 20px; background: rgba(14, 25, 46, 0.6); border: 1px solid rgba(216, 173, 50, 0.2);">
+            <div class="section-label center">
+                <span></span> READY TO SEE BETTER? <span></span>
+            </div>
+            <h2>Looking for the <span>Perfect Eyewear?</span></h2>
+            <p>Visit Vision Optics store or contact our team directly on WhatsApp for personalized assistance.</p>
+            <div style="margin-top: 30px;">
+                <a href="https://wa.me/919898174744" target="_blank" class="btn-primary">
+                    <i class="fab fa-whatsapp"></i> Chat With Us On WhatsApp <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= FOOTER ================= -->
+    <footer>
+        <div class="footer-logo">
+            <img src="images/logo.png" alt="Vision Optics">
+        </div>
+
+        <p>Premium Eyewear • Clear Vision • Timeless Style</p>
+
+        <div class="footer-social">
+            <a href="https://wa.me/919898174744" target="_blank" aria-label="WhatsApp">
+                <i class="fab fa-whatsapp"></i>
+            </a>
+            <a href="#" aria-label="Instagram">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <a href="#" aria-label="Facebook">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+        </div>
+
+        <div class="footer-bottom">
+            © 2026 Vision Optics. All Rights Reserved.
+        </div>
+    </footer>
+
+    <!-- ================= FLOATING WHATSAPP ================= -->
+    <a href="https://wa.me/919898174744" target="_blank" class="floating-whatsapp" aria-label="Contact Vision Optics on WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- JS -->
+    <script src="js/script.js"></script>
 </body>
-
 </html>
