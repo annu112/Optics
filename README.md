@@ -1,6 +1,6 @@
-# 👓 Lens Frame - Premium Optical Shop Website
+# 👓 Vision Optics - Premium Optical Shop Website
 
-A modern, responsive website for **Lens Frame**, a family-owned optical shop offering premium eyewear, eye testing, contact lenses, glasses repair, and home delivery services.
+A modern, responsive website for **Vision optics**, a family-owned optical shop offering premium eyewear, eye testing, contact lenses, glasses repair, and home delivery services.
 
 ## ✨ Features
 
@@ -38,23 +38,19 @@ A modern, responsive website for **Lens Frame**, a family-owned optical shop off
 
 - Experience: 28+ Years
 - Family-Owned Business
-- Location: Ghule Patil Nagar, Pandurang Industrial Area, Nanded, Pune, Maharashtra 411068
-- Hours: Monday – Sunday | 10:00 AM – 10:00 PM
-- Phone: +91 8999398569
-- Email: karandshrivastav007@gmail.com
+- Location: Sahyog chembar, shop no 3, talav gate, junagadh
+- Hours: Monday – Sunday | 10:00 AM – 9:00 PM
+- Phone: +91 9898174744
 
 ## 🚀 Live Website
 
 GitHub Pages:
 
-```
-https://karanshrivastav23.github.io/lens-frame-website
-```
 
 ## 📂 Project Structure
 
 ```
-lens-frame-website/
+Vision optics-website/
 │
 ├── index.html
 │
