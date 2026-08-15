@@ -1,10 +1,15 @@
 // Vision Optics - Master JavaScript
 
 // Shared Business Config
-const BUSINESS_CONFIG = {
+const BUSINESS_CONFIG = Object.freeze({
     whatsappNumber: "919898174744",
     storeName: "Vision Optics"
-};
+});
+
+// Timer references for memory leak prevention
+let messageTimeoutId = null;
+let messageRemoveTimeoutId = null;
+let whatsappTimeoutId = null;
 
 // Form validation helper
 function validateForm() {
@@ -17,7 +22,9 @@ function validateForm() {
     let isValid = true;
     
     // Clear previous error states
-    [name, phone, message].filter(Boolean).forEach(el => el.classList.remove('error', 'success'));
+    if (name) name.classList.remove('error', 'success');
+    if (phone) phone.classList.remove('error', 'success');
+    if (message) message.classList.remove('error', 'success');
     
     // Validate name
     if (!name.value.trim()) {
@@ -60,8 +67,11 @@ function validateForm() {
     return isValid;
 }
 
-// Show animated status message
+// Show animated status message with timer cleanup to avoid memory leaks
 function showMessage(text, type) {
+    if (messageTimeoutId) clearTimeout(messageTimeoutId);
+    if (messageRemoveTimeoutId) clearTimeout(messageRemoveTimeoutId);
+
     const existingMessage = document.querySelector('.form-message');
     if (existingMessage) {
         existingMessage.remove();
@@ -79,10 +89,14 @@ function showMessage(text, type) {
     }
     
     // Auto remove after 4 seconds
-    setTimeout(() => {
+    messageTimeoutId = setTimeout(() => {
         if (messageEl.parentNode) {
             messageEl.style.animation = 'slideDown .4s ease reverse';
-            setTimeout(() => messageEl.remove(), 400);
+            messageRemoveTimeoutId = setTimeout(() => {
+                if (messageEl.parentNode) {
+                    messageEl.remove();
+                }
+            }, 400);
         }
     }, 4000);
 }
@@ -91,7 +105,8 @@ function showMessage(text, type) {
 function sendToWhatsApp(e) {
     if (e && e.preventDefault) e.preventDefault();
     
-    const button = document.querySelector('#enquiryForm button[type="button"], #enquiryForm button[type="submit"]') || (e ? e.currentTarget : null);
+    const form = document.getElementById("enquiryForm");
+    const button = (form && form.querySelector('button[type="button"], button[type="submit"]')) || (e ? e.currentTarget : null);
     
     // Validate form
     if (!validateForm()) {
@@ -118,7 +133,9 @@ function sendToWhatsApp(e) {
         button.disabled = true;
     }
     
-    setTimeout(() => {
+    if (whatsappTimeoutId) clearTimeout(whatsappTimeoutId);
+
+    whatsappTimeoutId = setTimeout(() => {
         const text = `Hello ${BUSINESS_CONFIG.storeName},\n\n` +
                      `*Name:* ${name}\n` +
                      `*Phone:* ${phone}\n` +
@@ -134,7 +151,6 @@ function sendToWhatsApp(e) {
             button.disabled = false;
         }
         
-        const form = document.getElementById("enquiryForm");
         if (form) form.reset();
         
         window.open(url, "_blank");
@@ -143,20 +159,23 @@ function sendToWhatsApp(e) {
 
 // Collection Filter & Mobile Navigation Setup
 document.addEventListener('DOMContentLoaded', function() {
-    // Clear validation state on user input
-    const inputs = document.querySelectorAll('#enquiryForm input, #enquiryForm textarea');
-    inputs.forEach(input => {
-        input.addEventListener('focus', function() {
-            this.classList.remove('error', 'success');
-        });
-        input.addEventListener('input', function() {
-            this.classList.remove('error', 'success');
-        });
-    });
-
-    // Enter key form submit
     const form = document.getElementById('enquiryForm');
+
+    // Clear validation state on user input using event delegation
     if (form) {
+        form.addEventListener('focusin', function(e) {
+            if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') {
+                e.target.classList.remove('error', 'success');
+            }
+        });
+
+        form.addEventListener('input', function(e) {
+            if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') {
+                e.target.classList.remove('error', 'success');
+            }
+        });
+
+        // Enter key form submit
         form.addEventListener('keypress', function(e) {
             if (e.key === 'Enter' && e.target.tagName !== 'TEXTAREA') {
                 e.preventDefault();
@@ -166,29 +185,32 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Auto-close mobile menu when clicking nav links
+    // Auto-close mobile menu when clicking nav links using event delegation
     const menuToggle = document.getElementById('menu-toggle');
-    const navLinks = document.querySelectorAll('.nav-links a');
-    if (menuToggle) {
-        navLinks.forEach(link => {
-            link.addEventListener('click', () => {
+    const navLinks = document.querySelector('.nav-links');
+    if (menuToggle && navLinks) {
+        navLinks.addEventListener('click', function(e) {
+            if (e.target.tagName === 'A') {
                 menuToggle.checked = false;
-            });
+            }
         });
     }
 
-    // Interactive Collection Filter Tabs (for collection.html)
-    const filterBtns = document.querySelectorAll('.filter-btn');
-    const collectionItems = document.querySelectorAll('.collection-card');
+    // Interactive Collection Filter Tabs using event delegation (for collection.html)
+    const filterContainer = document.querySelector('.filter-container');
+    if (filterContainer) {
+        const filterBtns = Array.from(filterContainer.querySelectorAll('.filter-btn'));
+        const collectionItems = Array.from(document.querySelectorAll('.collection-card'));
 
-    if (filterBtns.length > 0 && collectionItems.length > 0) {
-        filterBtns.forEach(btn => {
-            btn.addEventListener('click', function() {
-                // Remove active class from all buttons
+        if (filterBtns.length > 0 && collectionItems.length > 0) {
+            filterContainer.addEventListener('click', function(e) {
+                const btn = e.target.closest('.filter-btn');
+                if (!btn) return;
+
                 filterBtns.forEach(b => b.classList.remove('active'));
-                this.classList.add('active');
+                btn.classList.add('active');
 
-                const filterValue = this.getAttribute('data-filter');
+                const filterValue = btn.getAttribute('data-filter');
 
                 collectionItems.forEach(item => {
                     const category = item.getAttribute('data-category');
@@ -200,6 +222,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
                 });
             });
-        });
+        }
     }
 });

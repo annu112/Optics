@@ -765,93 +765,92 @@
     var phoneInput = document.querySelector("#phone");
     var errorMsg = document.querySelector("#phone-error");
 
-    var iti = window.intlTelInput(phoneInput, {
-        initialCountry: "in",
-        separateDialCode: true,
-        nationalMode: true,
-        autoPlaceholder: "aggressive",
-        formatOnDisplay: false,
-        utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/utils.js"
-    });
+    if (phoneInput && window.intlTelInput) {
+        var iti = window.intlTelInput(phoneInput, {
+            initialCountry: "in",
+            separateDialCode: true,
+            nationalMode: true,
+            autoPlaceholder: "aggressive",
+            formatOnDisplay: false,
+            utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/utils.js"
+        });
 
-    function cleanPhoneNumber(value) {
-        return value.replace(/[^0-9]/g, "");
-    }
+        function cleanPhoneNumber(value) {
+            return value.replace(/[^0-9]/g, "");
+        }
 
-    function updatePhoneState() {
-        phoneInput.value = cleanPhoneNumber(phoneInput.value);
+        function updatePhoneState() {
+            var cleanVal = cleanPhoneNumber(phoneInput.value);
+            if (phoneInput.value !== cleanVal) {
+                phoneInput.value = cleanVal;
+            }
 
-        if (!phoneInput.value.trim()) {
-            errorMsg.style.display = "none";
+            if (!cleanVal) {
+                if (errorMsg) errorMsg.style.display = "none";
+                phoneInput.setCustomValidity("");
+                return;
+            }
+
+            if (iti.isValidNumber()) {
+                if (errorMsg) errorMsg.style.display = "none";
+                phoneInput.setCustomValidity("");
+                phoneInput.dataset.fullNumber = iti.getNumber();
+            } else {
+                if (errorMsg) errorMsg.style.display = "block";
+                phoneInput.setCustomValidity("Please enter a valid phone number for the selected country.");
+            }
+        }
+
+        // Allow digits and navigation keys only while typing.
+        phoneInput.addEventListener("keydown", function (event) {
+            var allowedKeys = [
+                "Backspace", "Delete", "Tab", "Escape", "Enter",
+                "ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown",
+                "Home", "End"
+            ];
+
+            if (
+                allowedKeys.includes(event.key) ||
+                event.ctrlKey ||
+                event.metaKey
+            ) {
+                return;
+            }
+
+            if (!/^[0-9]$/.test(event.key)) {
+                event.preventDefault();
+            }
+        });
+
+        // Update phone state directly on input and blur events without timers
+        phoneInput.addEventListener("input", updatePhoneState);
+        phoneInput.addEventListener("blur", updatePhoneState);
+
+        // Revalidate whenever the country is changed.
+        phoneInput.addEventListener("countrychange", function () {
+            var cleanVal = cleanPhoneNumber(phoneInput.value);
+            if (phoneInput.value !== cleanVal) {
+                phoneInput.value = cleanVal;
+            }
             phoneInput.setCustomValidity("");
-            return;
+            if (errorMsg) errorMsg.style.display = "none";
+            phoneInput.dataset.fullNumber = "";
+        });
+
+        function getFullPhoneNumber() {
+            updatePhoneState();
+
+            if (iti.isValidNumber()) {
+                if (errorMsg) errorMsg.style.display = "none";
+                phoneInput.setCustomValidity("");
+                var fullNumber = iti.getNumber();
+                phoneInput.dataset.fullNumber = fullNumber;
+                return fullNumber;
+            }
+
+            if (errorMsg) errorMsg.style.display = "block";
+            return null;
         }
-
-        if (iti.isValidNumber()) {
-            errorMsg.style.display = "none";
-            phoneInput.setCustomValidity("");
-            phoneInput.dataset.fullNumber = iti.getNumber();
-        } else {
-            errorMsg.style.display = "block";
-            phoneInput.setCustomValidity("Please enter a valid phone number for the selected country.");
-        }
-    }
-
-    // Allow digits only while typing.
-    phoneInput.addEventListener("keydown", function (event) {
-        var allowedKeys = [
-            "Backspace", "Delete", "Tab", "Escape", "Enter",
-            "ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown",
-            "Home", "End"
-        ];
-
-        if (
-            allowedKeys.includes(event.key) ||
-            event.ctrlKey ||
-            event.metaKey
-        ) {
-            return;
-        }
-
-        if (!/^[0-9]$/.test(event.key)) {
-            event.preventDefault();
-        }
-    });
-
-    // Remove invalid characters from typing, paste, drag/drop, etc.
-    phoneInput.addEventListener("input", updatePhoneState);
-
-    phoneInput.addEventListener("paste", function () {
-        setTimeout(updatePhoneState, 0);
-    });
-
-    phoneInput.addEventListener("drop", function () {
-        setTimeout(updatePhoneState, 0);
-    });
-
-    phoneInput.addEventListener("blur", updatePhoneState);
-
-    // Revalidate whenever the country is changed.
-    phoneInput.addEventListener("countrychange", function () {
-        phoneInput.value = cleanPhoneNumber(phoneInput.value);
-        phoneInput.setCustomValidity("");
-        errorMsg.style.display = "none";
-        phoneInput.dataset.fullNumber = "";
-    });
-
-    function getFullPhoneNumber() {
-        updatePhoneState();
-
-        if (iti.isValidNumber()) {
-            errorMsg.style.display = "none";
-            phoneInput.setCustomValidity("");
-            var fullNumber = iti.getNumber();
-            phoneInput.dataset.fullNumber = fullNumber;
-            return fullNumber;
-        }
-
-        errorMsg.style.display = "block";
-        return null;
     }
 </script>
 
